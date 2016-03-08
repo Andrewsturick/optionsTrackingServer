@@ -35,7 +35,7 @@ function runAPICycle(){
 
 
 
-var runCycle = new cronJob('00 10 12 * * 1-5', function(){
+var runCycle = new cronJob('00 29 06 * * 1-5', function(){
   runAPICycle()
 });
 runCycle.start();

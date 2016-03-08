@@ -1,7 +1,7 @@
 module.exports = {
   incrementsPerCycle :2,
   serverNumber: 1,
-  expirations: ["2016-02-19", "2016-03-18"],
+  expirations: [ "2016-03-18", "2016-04-15",],
   propertiesToRemove: [
     "AverageDailyVolume",
     "BookValue",

@@ -52,13 +52,18 @@ var yearsToExp = function(expDate){
 }
 //worker function to put greeks in options, if available
 function enrichOption(lastPrice, chain, type){
-  console.log(chain,'///////////////');
+  console.log(lastPrice);
     var expDate = chain.expiration_date;
     if(type=="call"){
+      console.log('58 ',(chain.ask+chain.bid)/2, Number(lastPrice), Number(chain.strike.replace("@", ".")), yearsToExp(expDate)/365, .03, "call");
       var iv = IV.getImpliedVolatility((chain.ask+chain.bid)/2, Number(lastPrice), Number(chain.strike.replace("@", ".")), yearsToExp(expDate)/365, .03, "call")
+      console.log(iv);
     } else{
+      console.log('61 ', (chain.ask+chain.bid)/2, Number(lastPrice), Number(chain.strike.replace("@", ".")), yearsToExp(expDate)/365, .03, "put");
       var iv = IV.getImpliedVolatility((chain.ask+chain.bid)/2, Number(lastPrice), Number(chain.strike.replace("@", ".")), yearsToExp(expDate)/365, .03, "put")
+      console.log(iv);
     }
+
     chain.iv = iv;
     chain.delta = greeks.getDelta( Number(lastPrice), Number(chain.strike.replace("@", ".")), yearsToExp(expDate)/365, iv, 0.03, type)
     chain.gamma = greeks.getGamma(Number(lastPrice), Number(chain.strike.replace("@", ".")), yearsToExp(expDate)/365, iv, 0.03, type)
